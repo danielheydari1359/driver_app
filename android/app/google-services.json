@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "126047199661",
+    "project_id": "closebydriverapp1",
+    "storage_bucket": "closebydriverapp1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126047199661:android:2f55d26c925f143cbd4124",
+        "android_client_info": {
+          "package_name": "com.example.driver_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc2Z4KEmBcJ-OGXkaFwn6ZscPU6WEkCIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:126047199661:android:9af1c05e35bdbd5dbd4124",
+        "android_client_info": {
+          "package_name": "com.mycompany.closebydrivermvp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc2Z4KEmBcJ-OGXkaFwn6ZscPU6WEkCIg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

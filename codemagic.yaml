@@ -1,11 +1,9 @@
 workflows:
   ios-debug:
-    name: iOS & Android Debug Build
+    name: iOS Debug Build
     environment:
       flutter: stable
       xcode: latest
-      vars:
-        GRADLE_OPTS: -Xmx4096m
     scripts:
       - name: Clean project
         script: |
@@ -13,9 +11,12 @@ workflows:
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: Update CocoaPods & resolve conflicts
+      - name: Fix CocoaPods repo & install
         script: |
           cd ios
+          rm -rf Pods Podfile.lock
+          pod deintegrate
+          pod setup
           pod repo update
           pod install
           pod update GTMSessionFetcher/Core
@@ -23,10 +24,6 @@ workflows:
       - name: Build iOS debug
         script: |
           flutter build ios --debug --no-codesign
-      - name: Build Android debug bundle
-        script: |
-          flutter build appbundle --debug
     artifacts:
       - build/ios/iphoneos/*.app
       - build/ios/**/*.dSYM
-      - build/app/outputs/**/*.aab

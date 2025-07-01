@@ -33,9 +33,11 @@ workflows:
         script: |
           sed -i '' '/org.gradle.jvmargs/d' android/gradle.properties
           echo "org.gradle.jvmargs=-Xmx6g" >> android/gradle.properties
-      - name: Build Android AppBundle
+      - name: Build Android AppBundle with increased memory
         script: |
-          flutter build appbundle --debug
+          export JAVA_OPTS="-Xmx6g"
+          export GRADLE_OPTS="-Xmx6g"
+          flutter build appbundle --debug --dart-define=JAVA_TOOL_OPTIONS=-Xmx6g      
       - name: Build iOS (no codesign)
         script: |
           flutter build ios --debug --no-codesign

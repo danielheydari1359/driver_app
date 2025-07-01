@@ -7,18 +7,23 @@ workflows:
       vars:
         JAVA_TOOL_OPTIONS: "-Xmx4096m"
     scripts:
+      - name: Set Java heap size globally
+        script: |
+          export _JAVA_OPTIONS="-Xmx6g"
       - name: Clean Flutter
         script: |
           flutter clean
       - name: Get Dependencies
         script: |
           flutter pub get
-      - name: iOS CocoaPods Fix
+      - name: iOS CocoaPods Full Reset
         script: |
           cd ios
           rm -rf Pods Podfile.lock ~/Library/Caches/CocoaPods ~/.cocoapods
           pod repo remove master || true
+          pod repo remove trunk || true
           pod setup
+          pod repo update
           pod install --repo-update
           pod update GTMSessionFetcher/Core
           cd ..
@@ -26,8 +31,6 @@ workflows:
         script: |
           sed -i '' '/org.gradle.jvmargs/d' android/gradle.properties
           echo "org.gradle.jvmargs=-Xmx6g" >> android/gradle.properties
-
-
       - name: Build Android AppBundle
         script: |
           flutter build appbundle --debug

@@ -25,7 +25,7 @@ workflows:
       - name: Increase Gradle heap size
         script: |
           sed -i '' '/org.gradle.jvmargs/d' android/gradle.properties
-          echo "org.gradle.jvmargs=-Xmx4g" >> android/gradle.properties
+          echo "org.gradle.jvmargs=-Xmx6g" >> android/gradle.properties
 
 
       - name: Build Android AppBundle

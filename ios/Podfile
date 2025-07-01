@@ -33,9 +33,13 @@ target 'Runner' do
   use_frameworks!
   use_modular_headers!
 
+  # ✅ Firebase pods
   pod 'Firebase/CoreOnly', $FirebaseSDKVersion
   pod 'Firebase/DynamicLinks', $FirebaseSDKVersion
-  pod 'FirebaseDynamicLinks', $FirebaseSDKVersion # ✅ Added explicitly
+  pod 'FirebaseDynamicLinks', $FirebaseSDKVersion
+
+  # ✅ Fix GTMSessionFetcher version conflict
+  pod 'GTMSessionFetcher', '~> 4.5.0'
 
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 

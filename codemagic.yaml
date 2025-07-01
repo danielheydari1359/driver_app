@@ -16,8 +16,7 @@ workflows:
       - name: iOS CocoaPods Fix
         script: |
           cd ios
-          pod repo update
-          pod install
+          pod install --repo-update
           pod update GTMSessionFetcher/Core
           cd ..
       - name: Build Android AppBundle
@@ -30,6 +29,7 @@ workflows:
       - build/app/outputs/**/*.aab
       - build/ios/iphoneos/*.app
       - build/ios/**/*.dSYM
+
   ios-debug:
     name: iOS Debug Build
     environment:

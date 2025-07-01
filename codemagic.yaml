@@ -16,17 +16,16 @@ workflows:
       - name: Get Dependencies
         script: |
           flutter pub get
-      - name: Update CocoaPods Specs
-        script: |
-          pod setup
-          pod repo add trunk https://cdn.cocoapods.org/ || true
-          pod repo update
       - name: iOS CocoaPods Full Reset
         script: |
           cd ios
           rm -rf Pods Podfile.lock ~/Library/Caches/CocoaPods ~/.cocoapods
           pod deintegrate || true
           pod cache clean --all || true
+          pod setup
+          pod repo remove trunk || true
+          pod repo add trunk https://cdn.cocoapods.org/ || true
+          pod repo update
           pod install --repo-update
           pod update GTMSessionFetcher
           cd ..
@@ -57,17 +56,16 @@ workflows:
       - name: Install Flutter dependencies
         script: |
           flutter pub get
-      - name: Update CocoaPods Specs
-        script: |
-          pod setup
-          pod repo add trunk https://cdn.cocoapods.org/ || true
-          pod repo update
       - name: Reset CocoaPods & update GTMSessionFetcher
         script: |
           cd ios
           rm -rf Pods Podfile.lock ~/Library/Caches/CocoaPods ~/.cocoapods
           pod deintegrate || true
           pod cache clean --all || true
+          pod setup
+          pod repo remove trunk || true
+          pod repo add trunk https://cdn.cocoapods.org/ || true
+          pod repo update
           pod install --repo-update
           pod update GTMSessionFetcher
           cd ..

@@ -23,14 +23,15 @@ workflows:
           pod deintegrate || true
           pod cache clean --all || true
           pod setup
-          pod repo add trunk https://cdn.cocoapods.org/
+          pod repo add trunk https://cdn.cocoapods.org/ || true
           pod repo update
           pod install --repo-update
           pod update GTMSessionFetcher
           cd ..
       - name: Increase Gradle heap size
         script: |
-          echo "org.gradle.jvmargs=-Xmx8192m -Dkotlin.daemon.jvm.options=-Xmx4096m" >> android/gradle.properties
+          sed -i '' '/org.gradle.jvmargs/d' android/gradle.properties
+          echo "org.gradle.jvmargs=-Xmx6g" >> android/gradle.properties
       - name: Build Android AppBundle
         script: |
           flutter build appbundle --debug
@@ -61,7 +62,7 @@ workflows:
           pod deintegrate || true
           pod cache clean --all || true
           pod setup
-          pod repo add trunk https://cdn.cocoapods.org/
+          pod repo add trunk https://cdn.cocoapods.org/ || true
           pod repo update
           pod install --repo-update
           pod update GTMSessionFetcher

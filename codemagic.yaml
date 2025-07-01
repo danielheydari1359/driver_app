@@ -1,21 +1,22 @@
 workflows:
-  ios-build:
-    name: iOS Build with Pod Update
+  ios-debug:
+    name: iOS Debug Build
     environment:
       flutter: stable
       xcode: latest
     scripts:
-      - name: Clean old builds
+      - name: Clean project
         script: |
           flutter clean
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: Update CocoaPods and install
+      - name: Update CocoaPods & resolve conflicts
         script: |
           cd ios
           pod repo update
           pod install
+          pod update GTMSessionFetcher/Core
           cd ..
       - name: Build iOS debug
         script: |

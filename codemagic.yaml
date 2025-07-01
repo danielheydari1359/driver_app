@@ -25,6 +25,7 @@ workflows:
           pod repo remove master || true
           pod repo remove trunk || true
           pod setup
+          pod repo add trunk https://cdn.cocoapods.org/
           pod repo update
           pod install --repo-update
           pod update GTMSessionFetcher/Core
@@ -65,6 +66,7 @@ workflows:
           pod repo remove master || true
           pod repo remove trunk || true
           pod setup
+          pod repo add trunk https://cdn.cocoapods.org/
           pod repo update
           pod install --repo-update
           pod update GTMSessionFetcher/Core

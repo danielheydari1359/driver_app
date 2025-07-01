@@ -19,6 +19,9 @@ workflows:
           pod install --repo-update
           pod update GTMSessionFetcher/Core
           cd ..
+      - name: Increase Gradle heap size
+        script: |
+          echo "org.gradle.jvmargs=-Xmx4g" >> android/gradle.properties
       - name: Build Android AppBundle
         script: |
           flutter build appbundle --debug

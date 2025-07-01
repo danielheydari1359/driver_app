@@ -1,27 +1,32 @@
 workflows:
-  ios-debug:
-    name: iOS Debug Build
+  default-workflow:
+    name: Driver App Build
     environment:
       flutter: stable
       xcode: latest
+      vars:
+        JAVA_TOOL_OPTIONS: "-Xmx4096m"
     scripts:
-      - name: Clean project
+      - name: Clean Flutter
         script: |
           flutter clean
-      - name: Install Flutter dependencies
+      - name: Get Dependencies
         script: |
           flutter pub get
-      - name: Clean CocoaPods and update repos
+      - name: iOS CocoaPods Fix
         script: |
           cd ios
-          rm -rf Pods Podfile.lock
-          pod deintegrate
-          pod setup
-          pod install --repo-update
+          pod repo update
+          pod install
+          pod update GTMSessionFetcher/Core
           cd ..
-      - name: Build iOS Debug (no codesign)
+      - name: Build Android AppBundle
+        script: |
+          flutter build appbundle --debug
+      - name: Build iOS (no codesign)
         script: |
           flutter build ios --debug --no-codesign
     artifacts:
+      - build/app/outputs/**/*.aab
       - build/ios/iphoneos/*.app
       - build/ios/**/*.dSYM

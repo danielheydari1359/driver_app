@@ -20,6 +20,8 @@ workflows:
         script: |
           cd ios
           rm -rf Pods Podfile.lock ~/Library/Caches/CocoaPods ~/.cocoapods
+          pod deintegrate || true
+          pod cache clean --all || true
           pod repo remove master || true
           pod repo remove trunk || true
           pod setup
@@ -57,9 +59,14 @@ workflows:
       - name: Reset CocoaPods & update GTMSessionFetcher
         script: |
           cd ios
-          rm -rf Pods Podfile.lock
+          rm -rf Pods Podfile.lock ~/Library/Caches/CocoaPods ~/.cocoapods
+          pod deintegrate || true
+          pod cache clean --all || true
+          pod repo remove master || true
+          pod repo remove trunk || true
+          pod setup
           pod repo update
-          pod install
+          pod install --repo-update
           pod update GTMSessionFetcher/Core
           cd ..
       - name: Build iOS debug

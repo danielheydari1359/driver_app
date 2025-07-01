@@ -36,7 +36,7 @@ target 'Runner' do
   # ✅ Firebase pods
   pod 'Firebase/CoreOnly', $FirebaseSDKVersion
   pod 'Firebase/DynamicLinks', $FirebaseSDKVersion
-  pod 'FirebaseDynamicLinks', $FirebaseSDKVersion
+ 
 
   # ✅ Fix GTMSessionFetcher version conflict
   pod 'GTMSessionFetcher', '~> 4.5.0'

@@ -1,9 +1,11 @@
 workflows:
   ios-debug:
-    name: iOS Debug Build
+    name: iOS & Android Debug Build
     environment:
       flutter: stable
       xcode: latest
+      vars:
+        GRADLE_OPTS: -Xmx4096m
     scripts:
       - name: Clean project
         script: |
@@ -21,6 +23,10 @@ workflows:
       - name: Build iOS debug
         script: |
           flutter build ios --debug --no-codesign
+      - name: Build Android debug bundle
+        script: |
+          flutter build appbundle --debug
     artifacts:
       - build/ios/iphoneos/*.app
       - build/ios/**/*.dSYM
+      - build/app/outputs/**/*.aab
